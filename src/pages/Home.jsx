@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Home.css'; 
 import { FaFacebook, FaTwitter, FaInstagram, FaShippingFast, FaBoxOpen, FaMapMarkerAlt, FaShieldAlt } from 'react-icons/fa';
 
-const Home = () => {
+const Landing = () => {
     const navigate = useNavigate();
 
     const handleOrderNow = () => {
@@ -91,4 +91,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Landing;

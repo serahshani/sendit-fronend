@@ -14,8 +14,14 @@ const Login = () => {
         const loggedInUser = localStorage.getItem('user');
         if (loggedInUser) {
             setSuccessMessage('You are already logged in!');
+            const user = JSON.parse(loggedInUser);
+            if (user.role === 'admin') {
+                navigate('/admin'); // Redirect to admin if the user is already logged in as admin
+            } else {
+                navigate('/home'); // Redirect to home if logged in as client
+            }
         }
-    }, []);
+    }, [navigate]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,7 +39,7 @@ const Login = () => {
             if (role === 'admin') {
                 navigate('/admin'); // Redirect to admin dashboard
             } else {
-                navigate('/homePage'); // Redirect to client dashboard
+                navigate('/home'); // Redirect to client dashboard
             }
         }, 1000);
 

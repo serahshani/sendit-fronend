@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
-import { FaHome, FaShoppingCart, FaSignInAlt, FaInfoCircle, FaUserShield, FaBox, FaMapMarkerAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaShoppingCart, FaSignInAlt, FaInfoCircle, FaUserShield, FaMapMarkerAlt, FaSignOutAlt } from 'react-icons/fa';
 
 const Navbar = () => {
     const navigate = useNavigate(); // Hook to navigate programmatically
@@ -13,29 +13,58 @@ const Navbar = () => {
         // Remove user data from localStorage
         localStorage.removeItem('user');
         
-        // Optionally, show a logout message or redirect to home
+        // Redirect to the home page after logout
         navigate('/'); // Redirect to the landing page (root page) after logout
     };
 
     return (
         <nav className="navbar">
             <div className="navbar-brand">
-                <Link to="/">SendIT</Link>
+                <Link to="/home">SendIT</Link>
             </div>
             <ul className="navbar-links">
                 <li>
-                    <Link to="/homePage">
+                    <Link to="/home">
                         <FaHome className="navbar-icon" /> Home
                     </Link>
                 </li>
 
-                {/* Conditionally render Login/Logout */}
+                {/* Conditionally render Login/Logout based on whether the user is logged in */}
                 {user ? (
-                    <li>
-                        <button onClick={handleLogout} className="logout-btn">
-                            <FaSignOutAlt className="navbar-icon" /> Logout
-                        </button>
-                    </li>
+                    <>
+                        <li>
+                            <button onClick={handleLogout} className="logout-btn">
+                                <FaSignOutAlt className="navbar-icon" /> Logout
+                            </button>
+                        </li>
+
+                        {/* Conditionally render Admin Dashboard link based on role */}
+                        {user.role === 'admin' && (
+                            <li>
+                                <Link to="/admin">
+                                    <FaUserShield className="navbar-icon" /> Admin Dashboard
+                                </Link>
+                            </li>
+                        )}
+
+                        {/* For logged-in users, show Cart and Parcel Tracking */}
+                        {user.role === 'client' && (
+                            <>
+                                <li>
+                                    <Link to="/cart">
+                                        <FaShoppingCart className="navbar-icon" /> Cart
+                                    </Link>
+                                </li>
+                            </>
+                        )}
+
+                        {/* Always show Parcel Tracking */}
+                        <li>
+                            <Link to="/parcel-tracking">
+                                <FaMapMarkerAlt className="navbar-icon" /> Parcel Tracking
+                            </Link>
+                        </li>
+                    </>
                 ) : (
                     <li>
                         <Link to="/login">
@@ -44,28 +73,10 @@ const Navbar = () => {
                     </li>
                 )}
 
-                {/* Conditionally render Admin Dashboard link based on role */}
-                {user && user.role === 'admin' && (
-                    <li>
-                        <Link to="/admin">
-                            <FaUserShield className="navbar-icon" /> Admin Dashboard
-                        </Link>
-                    </li>
-                )}
-
+                {/* Always show About link */}
                 <li>
                     <Link to="/about">
                         <FaInfoCircle className="navbar-icon" /> About
-                    </Link>
-                </li>
-                <li className="navbar-cart">
-                    <Link to="/cart">
-                        <FaShoppingCart className="navbar-icon" /> Cart
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/parcel-tracking">
-                        <FaMapMarkerAlt className="navbar-icon" /> Parcel Tracking
                     </Link>
                 </li>
             </ul>
