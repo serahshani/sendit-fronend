@@ -1,3 +1,4 @@
+// authService.jsx
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,11 +15,10 @@ export const AuthProvider = ({ children }) => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
       setUser(storedUser); // Set user if logged in
-      // If the user is logged in as a client, redirect them to home page
       if (storedUser.role === 'client') {
         navigate('/home'); // Redirect to home page for clients
       } else {
-        navigate('/login'); // Redirect to login page if not a client
+        navigate('/admin'); // Redirect to admin dashboard if the role is not 'client'
       }
     } else {
       navigate('/login'); // Redirect to login if no user is found
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     if (userData.role === 'client') {
       navigate('/home'); // Redirect to home page for clients
     } else {
-      navigate('/login'); // Redirect to login page if not a client
+      navigate('/admin'); // Redirect to admin dashboard for non-client
     }
   };
 

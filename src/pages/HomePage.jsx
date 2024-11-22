@@ -81,7 +81,6 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <Navbar />
       <div className="parcel-dashboard">
         <div className="sidebar">
           <h2 onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>SendIT</h2>

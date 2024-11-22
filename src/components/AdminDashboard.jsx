@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaCog, FaBox, FaHome } from 'react-icons/fa';
+import { FaCog, FaHome, FaBox } from 'react-icons/fa'; // <-- Added FaBox import
 import './AdminDashboard.css';
 
 const MapComponent = lazy(() => import('./MapComponent'));
@@ -27,7 +27,7 @@ const AdminDashboard = () => {
             <Link to="/"><FaHome /> Dashboard</Link>
           </li>
           <li>
-            <Link to="/parcels"><FaBox /> Parcels</Link>
+            <Link to="/parcels"><FaBox /> Parcels</Link> {/* FaBox is used here */}
           </li>
           <li>
             <Link to="/settings"><FaCog /> Settings</Link>

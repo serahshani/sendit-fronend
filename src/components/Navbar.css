@@ -1,177 +1,113 @@
-/* Navbar base styles */
+/* Navbar container */
 .navbar {
-    background: linear-gradient(to right, #ff9102, #dddedf);
-    padding: 1rem 2rem;
+    background-color: #1f1f1f; /* Darker background for a sleek look */
+    padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: sticky; /* Make navbar sticky */
     top: 0;
     z-index: 1000;
-    font-family: Arial, sans-serif;
-    animation: slideIn 0.5s ease-out;
 }
 
-.navbar-brand {
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-
+/* Navbar brand */
 .navbar-brand a {
-    color: white;
+    font-size: 26px;
+    color: #fff;
     text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px; /* Slight spacing for a clean look */
     transition: color 0.3s ease;
-}
-
-.navbar-brand a:hover {
-    color: #f1c40f;
 }
 
 /* Navbar links container */
 .navbar-links {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
     list-style: none;
-    margin: 0;
-    padding: 0;
-    flex-grow: 1; /* Allow space between navbar items */
+    display: flex;
+    gap: 30px;
 }
 
-/* Position for the login button at the end */
-.navbar-links li:last-child {
-    margin-left: auto; /* Move the login button to the far right */
-}
-
+/* Individual navbar link styles */
 .navbar-links li {
-    position: relative;
+    margin: 0;
 }
 
 .navbar-links a {
-    color: white;
     text-decoration: none;
-    font-size: 1rem;
-    padding: 0.5rem 0;
-    transition: all 0.3s ease;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Underline animation for links */
-.navbar-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #f1c40f;
-    transition: width 0.3s ease;
+/* Navbar icons style */
+.navbar-links a .navbar-icon {
+    margin-right: 10px;
+    font-size: 20px;
+    transition: transform 0.3s ease; /* Smooth animation for icons */
 }
 
-.navbar-links a:hover::after {
-    width: 100%;
-}
-
+/* Hover effect for links */
 .navbar-links a:hover {
-    color: #352c0b;
-    transform: translateY(-2px);
+    color: #ff6347; /* A modern red-orange color */
+    transform: scale(1.05); /* Slight scaling for hover effect */
 }
 
-/* Button styling */
-.change-address {
-    color: white;
+/* Hover effect for icons */
+.navbar-links a:hover .navbar-icon {
+    transform: scale(1.2); /* Slightly larger icon on hover */
+}
+
+/* Active link style */
+.navbar-links a.active {
+    color: #ff6347;
+    font-weight: bold;
+}
+
+/* Logout button style */
+.logout-btn {
+    background: none;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    color: #fff;
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    animation: pulse 2s infinite;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
 }
 
-.change-address:hover {
-    transform: scale(1.05);
-    animation: none;
+.logout-btn:hover {
+    color: #ff6347; /* Change color on hover */
 }
 
-/* Pulse animation for the button */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4);
-    }
-    70% {
-        transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
-    }
+/* Logout icon style */
+.logout-btn .navbar-icon {
+    margin-right: 8px;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 1024px) {
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
     .navbar {
-        padding: 1rem;
         flex-direction: column;
-    }
-
-    .navbar-brand {
-        margin-bottom: 1rem;
+        align-items: flex-start;
     }
 
     .navbar-links {
         flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
         width: 100%;
-        gap: 1rem;
-        text-align: center;
-    }
-
-    .navbar-links li {
-        width: 100%;
-    }
-
-    .change-address {
-        margin-top: 1rem;
-        width: 100%;
-        font-size: 1rem;
-    }
-}
-
-/* Extra small screens (mobile devices) */
-@media (max-width: 600px) {
-    .navbar {
-        padding: 0.5rem 1rem;
-    }
-
-    .navbar-brand {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
+        text-align: left;
     }
 
     .navbar-links a {
-        font-size: 0.9rem;
+        padding: 10px 20px;
+        width: 100%;
+        border-radius: 5px; /* Rounded corners for links */
     }
 
-    .navbar-links {
-        gap: 0.75rem;
-    }
-
-    .change-address {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-    }
-}
-
-/* Add slide-in animation when navbar first loads */
-@keyframes slideIn {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
+    .navbar-links a:hover {
+        background-color: #333;
     }
 }
